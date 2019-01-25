@@ -1,0 +1,27 @@
+{
+  "name": "event-booking",
+  "version": "1.0.0",
+  "description": "Event Booking system built using React.js frontend, GraphQL, Node.js and Mongo DB",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/barclayd/Event-Booking.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/barclayd/Event-Booking/issues"
+  },
+  "homepage": "https://github.com/barclayd/Event-Booking#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.9"
+  }
+}
