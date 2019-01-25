@@ -1,13 +1,14 @@
 const express = require('express');
 const app = express();
 const graphqlHttp = require('express-graphql');
+const mongoose = require('mongoose');
 const {buildSchema} = require('graphql');
 require('dotenv').config();
 
+const Event = require('./models/event');
+
 // middleware
 express.json();
-
-const events = [];
 
 app.use('/', graphqlHttp({
     schema: buildSchema(`
@@ -41,18 +42,35 @@ app.use('/', graphqlHttp({
     `),
     rootValue: {
         events: () => {
-            return events;
+            return Event
+                .find()
+                .then(events => {
+                    return events.map(event => {
+                        return {...event._doc, _id: event.id};
+                    })
+                })
+                .catch(err => {
+                    console.log(err);
+                    throw err;
+                });
         },
         createEvent: (args) => {
-            const event = {
-                _id: Math.random().toString(),
-                title: args.eventInput.title,
+            const event = new Event({
+               title: args.eventInput.title,
                 description: args.eventInput.description,
                 price: +args.eventInput.price,
-                date: args.eventInput.date
-            };
-            events.push(event);
-            return event;
+                data: new Date(args.eventInput.date),
+            });
+            return event
+                .save()
+                .then(result => {
+                    console.log(result);
+                    return {...result._doc, _id: result.id};
+                })
+                .catch(err => {
+                    console.log(err);
+                    throw err;
+                });
         },
     },
     graphiql: true
@@ -65,4 +83,11 @@ app.use('/', (req, res, next) => {
     })
 });
 
-app.listen(process.env.PORT);
+// connect to MongoDB
+mongoose.connect(`mongodb+srv://${process.env.ATLAS_USER}:${process.env.ATLAS_PW}@cluster0-vxymi.mongodb.net/${process.env.DB_NAME}?retryWrites=true`, {useNewUrlParser: true})
+    .then(() => {
+        app.listen(process.env.PORT);
+    })
+    .catch(err => {
+        console.log(err);
+    });
