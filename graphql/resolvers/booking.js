@@ -4,7 +4,10 @@ const {transformEvent} = require('./mergeResolvers/events');
 const {transformBooking} = require('./mergeResolvers/booking');
 
 module.exports = {
-    bookings: async () => {
+    bookings: async (args, req) => {
+        if (!req.isAuth) {
+            throw new Error ('Authentication required');
+        }
         try {
             const bookings = await Booking.find();
             return bookings.map(booking => {
@@ -14,17 +17,26 @@ module.exports = {
             throw err;
         }
     },
-    bookEvent: async args => {
+    bookEvent: async (args, req) => {
+        if (!req.isAuth) {
+            throw new Error ('Authentication required');
+        }
         const fetchedEvent = await Event.findOne({ _id: args.eventId });
         const booking = new Booking({
-            user: '5c4b934322a0423d8497e3da',
+            user: req.userId,
             event: fetchedEvent
         });
         const result = await booking.save();
         return transformBooking(result);
     },
-    cancelBooking: async(args) => {
+    cancelBooking: async(args, req) => {
+        if (!req.isAuth) {
+            throw new Error ('Authentication required');
+        }
         try {
+            if (req.userId !== args.userId) {
+                throw new Error ('Authentication required');
+            }
             const booking = await Booking.findById(args.bookingId).populate('event');
             const event = transformEvent(booking.event);
             await Booking.deleteOne({_id: args.bookingId});

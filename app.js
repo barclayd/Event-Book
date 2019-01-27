@@ -7,8 +7,12 @@ require('dotenv').config();
 const graphQLSchema = require('./graphql/schema/index');
 const graphQlResolvers = require('./graphql/resolvers/index');
 
+const checkAuth = require('./middleware/check-auth');
+
 // middleware
 express.json();
+
+app.use(checkAuth);
 
 app.use('/', graphqlHttp({
     schema: graphQLSchema,
