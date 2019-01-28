@@ -1,4 +1,5 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
+import AuthContext from '../../context/auth-context';
 import * as classes from './Auth.module.css';
 
 class Auth extends Component {
@@ -12,6 +13,8 @@ class Auth extends Component {
     state = {
       isLogin: true
     };
+
+    static contextType = AuthContext;
 
     switchAuthModeHandler = () => {
         this.setState(prevState => {
@@ -72,12 +75,15 @@ class Auth extends Component {
                 return res.json();
             })
             .then(resData => {
+                if (resData.data.login.token) {
+                    this.context.login(resData.data.login.token, resData.data.login.userId, resData.data.login.tokenExpiration);
+                }
                 console.log(resData);
             })
             .catch(err => {
                 console.log(err);
 
-            })
+            });
 
     };
 
