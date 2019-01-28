@@ -1,0 +1,51 @@
+.authForm {
+    width: 25rem;
+    max-width: 80%;
+    margin: 10rem auto;
+}
+
+.formControl label,
+.formControl input {
+    width: 100%;
+    margin-bottom: 0.5rem;
+}
+
+.formControl {
+    margin-bottom: 0.75rem;
+}
+
+.formControl label {
+    font-weight: bold;
+}
+
+.formControl input {
+    padding: 0.2rem 0.15rem;
+    margin-top: 0.5rem;
+    font: inherit;
+    font-size: 1rem;
+}
+
+.toggleBtns button {
+    background-color: #2F556B;
+    color: #fff;
+    font-family: inherit;
+    font-size: 1rem;
+    border: 1px solid rgba(47,85,107, 0.9);
+    border-radius: 3px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.26);
+    padding: 0.25rem 1rem;
+    margin-right: 5rem;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.toggleBtns button:hover,
+.toggleBtns button:active {
+    background: rgba(47,85,107, 0.8);;
+    border: 1px solid rgba(47,85,107, 0.8);
+}
+
+
+.toggleBtns button:focus {
+    outline: none;
+}
