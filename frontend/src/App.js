@@ -4,21 +4,65 @@ import Auth from './containers/Auth/Auth';
 import Events from './containers/Events/Events';
 import Bookings from './containers/Bookings/Bookings';
 import Navigation from './components/Navigation/navigation';
+import AuthContext from './context/auth-context';
 import * as classes from './App.module.css';
 
 class App extends Component {
+
+    state = {
+      token: null,
+      userId: null
+    };
+
+    login = (token, userId, tokenExpiration) => {
+        this.setState({
+            token: token,
+            userId: userId
+        })
+    };
+
+    logout = () => {
+        this.setState({
+            token: null,
+            userId: null
+        })
+    };
+
   render() {
+      let routes;
+      if (this.state.token) {
+          routes = (
+              <React.Fragment>
+                  <Redirect from="/" to="/events" exact />
+                  <Redirect from="/auth" to="/events" exact />
+                  <Route exact path="/bookings" component={Bookings}/>
+                  <Route exact path="/events" component={Events}/>
+              </React.Fragment>
+          )
+      } else {
+          routes = (
+              <React.Fragment>
+                  <Redirect from="/" to="/auth" exact />
+                  <Route exact path="/auth" component={Auth}/>
+                  <Route exact path="/events" component={Events}/>
+              </React.Fragment>
+          )
+      }
     return (
         <React.Fragment>
+            <AuthContext.Provider value={{
+                token: this.state.token,
+                userId: this.state.userId,
+                login: this.login,
+                logout: this.logout
+            }}>
             <Navigation/>
             <main className={classes.content}>
                 <Switch>
-                    <Redirect from="/" to="/auth" exact />
-                    <Route exact path="/auth" component={Auth}/>
-                    <Route exact path="/events" component={Events}/>
-                    <Route exact path="/bookings" component={Bookings}/>
+                    {routes}
                 </Switch>
             </main>
+            </AuthContext.Provider>
         </React.Fragment>
     );
   }
