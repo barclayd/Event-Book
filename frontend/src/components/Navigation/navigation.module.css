@@ -1,0 +1,44 @@
+.header {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 3.5rem;
+    background-color: #556B2F;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.logo h1{
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.navigationItems  {
+    margin-left: 1.5rem;
+}
+
+.navigationItems ul {
+    list-style: none;
+    margin: 0 0 0 15.5rem;
+    padding: 0;
+    display: flex;
+}
+
+.navigationItems li{
+    margin: 0 1.5rem;
+}
+
+.navigationItems a {
+    text-decoration: none;
+    color: #ccd2c0;
+}
+
+.navigationItems a:hover,
+.navigationItems a:active,
+.navigationItems a.active {
+    color: #8299a6;
+}
+
