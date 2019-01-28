@@ -4,16 +4,18 @@
     top: 0;
     width: 100%;
     height: 3.5rem;
-    background-color: #556B2F;
+    background-color: rgba(85,107,47, 1);
     color: #fff;
     padding: 0.5rem 1rem;
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 
 .logo h1{
-    margin: 0;
+    margin: 0 0 0 2rem;
     font-size: 1.5rem;
+    padding-right: 10rem;
 }
 
 .navigationItems  {
@@ -22,7 +24,7 @@
 
 .navigationItems ul {
     list-style: none;
-    margin: 0 0 0 15.5rem;
+    margin-right: 28rem;
     padding: 0;
     display: flex;
 }
@@ -40,5 +42,45 @@
 .navigationItems a:active,
 .navigationItems a.active {
     color: #8299a6;
+    padding: 1.4rem 0.5rem;
+    background-color: rgb(66, 87, 24);
+
+}
+
+@media (min-width: 500px) and (max-width: 900px) {
+    .header {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 3.5rem;
+        background-color: rgba(85,107,47, 1);
+        color: #fff;
+        padding: 0.5rem 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: normal;
+    }
+    .logo {
+        margin: 0 0;
+    }
+
+    .navigationItems ul {
+        list-style: none;
+        margin: 0 0;
+        padding: 0;
+        display: flex;
+    }
+}
+
+@media (max-width: 499px) {
+    .navigationItems {
+        display: none;
+    }
+    .logo h1{
+        margin: 0 0 0 1px;
+        align-self: end;
+        font-size: 1.5rem;
+    }
 }
 
