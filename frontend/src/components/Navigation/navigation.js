@@ -13,12 +13,15 @@ const navigation = (props) => (
                     </div>
                     <nav className={classes.navigationItems}>
                         <ul>
-                            {!context.token && (
-                                <li><NavLink to="/auth">Login</NavLink></li>
-                            )}
                             <li><NavLink to="/events">Events</NavLink></li>
                             {context.token && (
                                 <li><NavLink to="/bookings">Bookings</NavLink></li>
+                            )}
+                            {context.token && (
+                                <li><button onClick={context.logout}>Logout</button></li>
+                            )}
+                            {!context.token && (
+                                <li><NavLink to="/auth">Login</NavLink></li>
                             )}
                         </ul>
                     </nav>

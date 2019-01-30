@@ -27,20 +27,34 @@
     margin-right: 28rem;
     padding: 0;
     display: flex;
+    align-items: center;
+    width: 100%;
 }
 
 .navigationItems li{
     margin: 0 1.5rem;
 }
 
-.navigationItems a {
+.navigationItems a,
+.navigationItems button {
     text-decoration: none;
     color: #ccd2c0;
+    border: none;
+    font: inherit;
+    cursor: pointer;
+    margin: 0;
+}
+
+.navigationItems button {
+    background: none;
+    color: #ccd2c0
 }
 
 .navigationItems a:hover,
 .navigationItems a:active,
-.navigationItems a.active {
+.navigationItems a.active,
+.navigationItems button:hover,
+.navigationItems button:active {
     color: #8299a6;
     padding: 1.4rem 0.5rem;
     background-color: rgb(66, 87, 24);
