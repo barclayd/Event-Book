@@ -25,6 +25,12 @@ class Events extends Component {
                         <Backdrop/>
                         <Modal title='Add Event' canCancel canConfirm toggleModal={this.createEventHandler} onConfirm={this.createEventHandler}>
                             <p>Modal content goes here!</p>
+                            <form>
+                                <div className={classes.formControl}>
+                                    <label htmlFor='title'>Title</label>
+                                    <input type='text' id='title'>Title</input>
+                                </div>
+                            </form>
                         </Modal>
                     </React.Fragment>
                     : null}

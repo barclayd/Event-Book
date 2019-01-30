@@ -25,7 +25,7 @@
     font-size: 1rem;
 }
 
-.toggleBtns button {
+.toggleBtns button{
     background-color: #2F556B;
     color: #fff;
     font-family: inherit;
@@ -34,9 +34,13 @@
     border-radius: 3px;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.26);
     padding: 0.25rem 1rem;
-    margin-right: 5rem;
     text-decoration: none;
     cursor: pointer;
+    box-sizing: border-box;
+}
+
+.toggleBtns button:nth-child(2) {
+    margin-left: 20vw;
 }
 
 .toggleBtns button:hover,
@@ -48,4 +52,24 @@
 
 .toggleBtns button:focus {
     outline: none;
+}
+
+@media (max-width: 450px) {
+
+    .toggleBtns button:nth-child(2) {
+        margin-top: 2vh;
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 525px) {
+    .toggleBtns button:nth-child(2) {
+        margin-left: 10vw;
+    }
+}
+
+@media (min-width: 800px) {
+    .toggleBtns button:nth-child(2) {
+        margin-left: 11vw;
+    }
 }

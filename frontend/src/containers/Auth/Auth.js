@@ -100,8 +100,8 @@ class Auth extends Component {
                     <input type="password" id="password" ref={this.passwordEl}/>
                 </div>
              <div className={classes.toggleBtns}>
-                 <button type="button" onClick={this.switchAuthModeHandler}>Switch to {this.state.isLogin ? 'Sign Up' : 'Login'}</button>
-                 <button type="submit">Submit</button>
+                 <button type="button" onClick={this.switchAuthModeHandler} id='sign-up'>Switch to {this.state.isLogin ? 'Sign Up' : 'Login'}</button>
+                 <button type="submit" id='submit'>Submit</button>
              </div>
             </form>
             </React.Fragment>
