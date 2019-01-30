@@ -33,18 +33,18 @@ class App extends Component {
       if (this.state.token) {
           routes = (
               <React.Fragment>
-                  <Redirect from="/" to="/events" exact />
-                  <Redirect from="/auth" to="/events" exact />
                   <Route exact path="/bookings" component={Bookings}/>
                   <Route exact path="/events" component={Events}/>
+                  <Redirect from="/" to="/events" exact />
+                  <Redirect from="/login" to="/events" exact />
               </React.Fragment>
           )
       } else {
           routes = (
               <React.Fragment>
-                  <Redirect from="/" to="/auth" exact />
-                  <Route exact path="/auth" component={Auth}/>
+                  <Route exact path="/login" component={Auth}/>
                   <Route exact path="/events" component={Events}/>
+                  <Redirect from='/bookings' to="/login" exact />
               </React.Fragment>
           )
       }
