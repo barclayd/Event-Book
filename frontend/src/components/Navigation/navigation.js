@@ -21,7 +21,7 @@ const navigation = (props) => (
                                 <li><button onClick={context.logout}>Logout</button></li>
                             )}
                             {!context.token && (
-                                <li><NavLink to="/auth">Login</NavLink></li>
+                                <li><NavLink to="/login">Login</NavLink></li>
                             )}
                         </ul>
                     </nav>
