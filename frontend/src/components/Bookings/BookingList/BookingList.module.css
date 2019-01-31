@@ -1,0 +1,37 @@
+.bookingList {
+    list-style: none;
+    margin: 0 auto;
+    padding: 0;
+    width: 40rem;
+    max-width: 90%;
+}
+
+.bookingItem {
+    margin: 2rem 0;
+    padding: 0.5rem;
+    border: 1px solid #2F556B;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bookingItemData {
+
+}
+
+.bookingAction button {
+    background: #bb2124;
+}
+.createdAt,
+.updatedAt {
+    padding: 0;
+    margin: 0;
+}
+
+.createdAt {
+    color: #767676;
+}
+
+.updatedAt {
+    color: #2F556B;
+}
