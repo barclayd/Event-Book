@@ -3,6 +3,7 @@ import Modal from '../../components/Modal/modal';
 import Backdrop from '../../components/Backdrop/backdrop';
 import AuthContext from '../../context/auth-context';
 import EventList from '../../components/Events/EventList/eventList';
+import Spinner from '../../components/Spinner/spinner';
 import * as classes from './Events.module.css';
 
 class Events extends Component {
@@ -24,7 +25,8 @@ class Events extends Component {
     state = {
         createEvent: false,
         validationPass: false,
-        events: []
+        events: [],
+        loading: false
     };
 
     createEventHandler = () => {
@@ -71,10 +73,6 @@ class Events extends Component {
                         price
                         description
                         date
-                        creator {
-                            _id
-                            email
-                        }
                    } 
                 }
             `
@@ -96,7 +94,22 @@ class Events extends Component {
             })
             .then(resData => {
                 console.log(resData);
-                this.fetchEvents();
+                this.setState(prevState => {
+                    const updatedEvents = [...prevState.events];
+                    updatedEvents.push({
+                        _id: resData.data.createEvent._id,
+                        title: resData.data.createEvent.title,
+                        price: resData.data.createEvent.price,
+                        description: resData.data.createEvent.description,
+                        date: resData.data.createEvent.date,
+                        creator: {
+                            _id: this.context.userId,
+                        }
+                    });
+                    return {
+                        events: updatedEvents
+                    };
+                });
             })
             .catch(err => {
                 console.log(err);
@@ -104,7 +117,9 @@ class Events extends Component {
     };
 
     fetchEvents = () => {
-
+        this.setState({
+            loading: true
+        });
         const requestBody = {
             query: `
                 query {
@@ -140,11 +155,15 @@ class Events extends Component {
                 console.log(resData);
                 const events = resData.data.events;
                 this.setState({
-                    events
+                    events,
+                    loading: false
                 });
             })
             .catch(err => {
                 console.log(err);
+                this.setState({
+                    loading: false
+                })
             });
     };
 
@@ -184,7 +203,7 @@ class Events extends Component {
                         <button className={classes.btn} onClick={this.createEventHandler}>Create Event</button>
                     )}
                 </div>
-                <EventList events={this.state.events} owner={this.context.userId}/>
+                {this.state.loading ? <Spinner /> : <EventList events={this.state.events} owner={this.context.userId}/>}
             </React.Fragment>
         );
     }
