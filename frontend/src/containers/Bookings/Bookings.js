@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import BookingList from '../../components/Bookings/BookingList/BookingList';
 import Spinner from '../../components/Spinner/Spinner';
 import AuthContext from "../../context/auth-context";
 
@@ -9,7 +10,8 @@ class Bookings extends Component {
 
     state = {
         loading: false,
-        bookings: []
+        bookings: [],
+        currentBooking: null
     };
 
     componentDidMount() {
@@ -67,14 +69,60 @@ class Bookings extends Component {
             });
     };
 
+    cancelBookingHandler = bookingId => {
+        this.setState({
+            currentBooking: bookingId,
+            loading: true
+        });
+        const requestBody = {
+            query: `
+                mutation {
+                    cancelBooking(bookingId: "${bookingId}") {
+                       _id
+                        title
+                   } 
+                }
+            `
+        };
+
+        fetch('http://localhost:3001/graphql', {
+            method: 'POST',
+            body: JSON.stringify(requestBody),
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${this.context.token}`
+            }
+        })
+            .then(res => {
+                if (res.status !== 200 && res.status !== 201) {
+                    throw new Error('Failed')
+                }
+                return res.json();
+            })
+            .then(resData => {
+                console.log(resData);
+                this.setState(prevState => {
+                    const updatedBookings = prevState.bookings.filter(booking => booking._id !== bookingId);
+                    return {
+                        currentBooking: null,
+                        loading: false,
+                        bookings: updatedBookings
+                    }
+                });
+            })
+            .catch(err => {
+                console.log(err);
+                this.setState({
+                    loading: false
+                })
+            });
+    };
+
     render () {
         return (
             <React.Fragment>
-            <h1>Bookings</h1>
                 {this.state.loading ? <Spinner /> : <ul>
-                {this.state.bookings.map(booking => {
-                    return <li key={booking._id}>{booking.event.title}</li>
-                })}
+                <BookingList bookings={this.state.bookings} cancelBooking={this.cancelBookingHandler}/>
             </ul>}
             </React.Fragment>
         );

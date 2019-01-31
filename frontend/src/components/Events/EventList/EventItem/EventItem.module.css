@@ -1,5 +1,5 @@
 .listedEvent {
-    margin: 4vh 0;
+    margin: 4vh auto;
     padding: 1vh 1vw;
     border: 1px solid rgb(52, 69, 31);
     display: flex;

@@ -9,7 +9,7 @@ module.exports = {
             throw new Error ('Authentication required');
         }
         try {
-            const bookings = await Booking.find();
+            const bookings = await Booking.find({user: req.userId });
             return bookings.map(booking => {
                 return transformBooking(booking);
             });
@@ -34,9 +34,6 @@ module.exports = {
             throw new Error ('Authentication required');
         }
         try {
-            if (req.userId !== args.userId) {
-                throw new Error ('Authentication required');
-            }
             const booking = await Booking.findById(args.bookingId).populate('event');
             const event = transformEvent(booking.event);
             await Booking.deleteOne({_id: args.bookingId});

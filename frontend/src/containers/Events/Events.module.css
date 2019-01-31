@@ -21,17 +21,17 @@ button:active {
     text-align: center;
     border: 1px solid #2F556B;
     padding: 3rem;
-    margin: 15vh calc(1vw - 1rem) 2vh calc(1vw - 1rem);
-    width: 80vw;
+    margin: 15vh auto 2vh auto;
+    width: 30rem;
     max-width: 80%;
 }
 
-@media (min-width: 768px) {
-    .eventsControl {
-        margin-left: calc(100vw / 4);
-        width: 30vw;
-    }
-}
+/*@media (min-width: 768px) {*/
+    /*.eventsControl {*/
+        /*margin-left: calc(100vw / 4);*/
+        /*width: 30vw;*/
+    /*}*/
+/*}*/
 
 .formControl label,
 .formControl input {
