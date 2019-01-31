@@ -13,7 +13,8 @@ const eventList = props => {
             price={event.price}
             date={event.date}
             description={event.description}
-            creator={event.creator._id === props.owner}/>
+            creator={event.creator._id === props.owner}
+            onDetail={props.onViewDetail}/>
     });
 
     return (

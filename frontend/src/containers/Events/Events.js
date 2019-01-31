@@ -26,21 +26,30 @@ class Events extends Component {
         createEvent: false,
         validationPass: false,
         events: [],
-        loading: false
+        loading: false,
+        selectedEvent: null
     };
 
     createEventHandler = () => {
         this.setState(prevState => {
             return {
-                createEvent: !prevState.createEvent
+                createEvent: !prevState.createEvent,
+                selectedEvent: null
             }
         });
+    };
+
+    modalViewDetailHandler = () => {
+        this.setState({
+            selectedEvent: null
+        })
     };
 
     modalConfirmHandler = () => {
         this.setState(prevState => {
             return {
-                createEvent: !prevState.createEvent
+                createEvent: !prevState.createEvent,
+                selectedEvent: null
             }
         });
         const title = this.titleRef.current.value;
@@ -167,15 +176,25 @@ class Events extends Component {
             });
     };
 
+    showDetailHandler = eventId => {
+        this.setState(prevState => {
+           const selectedEvent = prevState.events.find(e => e._id === eventId);
+           return {
+               selectedEvent
+           }
+        })
+    };
+
+    bookEventHandler = () => {
+    };
 
     render () {
 
         return (
             <React.Fragment>
+                {(this.state.createEvent || this.state.selectedEvent) && <Backdrop/>}
                 {this.state.createEvent ?
-                    <React.Fragment>
-                        <Backdrop/>
-                        <Modal title='Add Event' canCancel canConfirm toggleModal={this.createEventHandler} onConfirm={this.modalConfirmHandler}>
+                        <Modal title='Add Event' canCancel canConfirm toggleModal={this.modalConfirmHandler} onConfirm={this.modalConfirmHandler} cancelName='Cancel' confirmName='Confirm'>
                             <form>
                                 <div className={classes.formControl}>
                                     <label htmlFor='title'>Title</label>
@@ -195,15 +214,25 @@ class Events extends Component {
                                 </div>
                             </form>
                         </Modal>
-                    </React.Fragment>
                     : null}
+                {this.state.selectedEvent &&
+                    <Modal title={this.state.selectedEvent.title} canCancel canConfirm toggleModal={this.modalViewDetailHandler} onConfirm={this.bookEventHandler} cancelName='Dismiss' confirmName='Book Event'>
+                        <h1>{this.state.selectedEvent.title}</h1>
+                        <h2>£{this.state.selectedEvent.price} - {new Date(this.state.selectedEvent.date).toLocaleDateString()} </h2>
+                        <p>{this.state.selectedEvent.description}</p>
+                    </Modal>
+                }
                 <div className={classes.eventsControl}>
                 <h1>Events</h1>
                     {this.context.token && (
                         <button className={classes.btn} onClick={this.createEventHandler}>Create Event</button>
                     )}
                 </div>
-                {this.state.loading ? <Spinner /> : <EventList events={this.state.events} owner={this.context.userId}/>}
+                {this.state.loading ? <Spinner /> :
+                    <EventList
+                        events={this.state.events}
+                        owner={this.context.userId}
+                        onViewDetail={this.showDetailHandler}/>}
             </React.Fragment>
         );
     }

@@ -11,8 +11,8 @@ const modal = (props) => (
         </section>
         <div className={classes.modalAction}>
                 <div className={classes.modalBtns}>
-            {props.canCancel && <button className={classes.btnCancel} onClick={props.toggleModal}>Cancel</button>}
-            {props.canConfirm && <button className={classes.btnConfirm} onClick={props.onConfirm}>Confirm</button>}
+            {props.canCancel && <button className={classes.btnCancel} onClick={props.toggleModal}>{props.cancelName}</button>}
+            {props.canConfirm && <button className={classes.btnConfirm} onClick={props.onConfirm}>{props.confirmName}</button>}
         </div>
         </div>
     </div>
