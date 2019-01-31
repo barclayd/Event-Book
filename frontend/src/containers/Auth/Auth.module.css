@@ -1,7 +1,7 @@
 .authForm {
     width: 25rem;
     max-width: 80%;
-    margin: 10rem auto;
+    margin: 15vh 25vw;
 }
 
 .formControl label,
@@ -37,6 +37,7 @@
     text-decoration: none;
     cursor: pointer;
     box-sizing: border-box;
+    margin-top: 3vh;
 }
 
 .toggleBtns button:nth-child(2) {
@@ -57,7 +58,7 @@
 @media (max-width: 450px) {
 
     .toggleBtns button:nth-child(2) {
-        margin-top: 2vh;
+        margin-top: 4vh;
         margin-left: 0;
     }
 }
@@ -71,5 +72,17 @@
 @media (min-width: 800px) {
     .toggleBtns button:nth-child(2) {
         margin-left: 11vw;
+    }
+}
+
+@media (max-width: 1040px) {
+    .authForm {
+        margin: 20vh 10vw;
+    }
+}
+
+@media (min-width: 1450px) {
+    .toggleBtns button:nth-child(2) {
+        margin-left: 8vw;
     }
 }
