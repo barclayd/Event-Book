@@ -6,7 +6,14 @@ const eventList = props => {
 
     const events = props.events.map(event => {
         console.log(event.creator._id);
-        return <EventItem key={event._id} eventId={event._id} title={event.title} price={event.price} className={classes.listedEvent} creator={event.creator._id === props.owner}/>
+        return <EventItem
+            key={event._id}
+            eventId={event._id}
+            title={event.title}
+            price={event.price}
+            date={event.date}
+            description={event.description}
+            creator={event.creator._id === props.owner}/>
     });
 
     return (
