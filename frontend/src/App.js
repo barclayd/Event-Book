@@ -3,7 +3,7 @@ import {Route, Redirect, Switch} from 'react-router-dom';
 import Auth from './containers/Auth/Auth';
 import Events from './containers/Events/Events';
 import Bookings from './containers/Bookings/Bookings';
-import Navigation from './components/Navigation/navigation';
+import Navigation from './components/Navigation/Navigation';
 import AuthContext from './context/auth-context';
 import * as classes from './App.module.css';
 

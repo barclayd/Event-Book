@@ -1,7 +1,7 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
 import AuthContext from '../../context/auth-context';
-import * as classes from './navigation.module.css';
+import * as classes from './Navigation.module.css';
 
 const navigation = (props) => {
 
