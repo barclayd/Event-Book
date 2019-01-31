@@ -33,18 +33,22 @@ class App extends Component {
       if (this.state.token) {
           routes = (
               <React.Fragment>
+                  <Switch>
                   <Route exact path="/bookings" component={Bookings}/>
                   <Route exact path="/events" component={Events}/>
-                  <Redirect from="/" to="/events" exact />
-                  <Redirect from="/login" to="/events" exact />
+                  <Redirect from='/login' to="/events" />
+                  <Redirect to="/events" />
+                  </Switch>
               </React.Fragment>
           )
       } else {
           routes = (
               <React.Fragment>
+                  <Switch>
                   <Route exact path="/login" component={Auth}/>
                   <Route exact path="/events" component={Events}/>
-                  <Redirect from='/bookings' to="/login" exact />
+                  <Redirect to="/events"  />
+                  </Switch>
               </React.Fragment>
           )
       }
@@ -58,9 +62,7 @@ class App extends Component {
             }}>
             <Navigation/>
             <main className={classes.content}>
-                <Switch>
                     {routes}
-                </Switch>
             </main>
             </AuthContext.Provider>
         </React.Fragment>
