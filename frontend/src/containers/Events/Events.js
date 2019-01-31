@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import Modal from '../../components/Modal/modal';
-import Backdrop from '../../components/Backdrop/backdrop';
+import Modal from '../../components/Modal/Modal';
+import Backdrop from '../../components/Backdrop/Backdrop';
 import AuthContext from '../../context/auth-context';
-import EventList from '../../components/Events/EventList/eventList';
-import Spinner from '../../components/Spinner/spinner';
+import EventList from '../../components/Events/EventList/EventList';
+import Spinner from '../../components/Spinner/Spinner';
 import * as classes from './Events.module.css';
 
 class Events extends Component {
@@ -29,6 +29,7 @@ class Events extends Component {
         loading: false,
         selectedEvent: null
     };
+    isActive = true;
 
     createEventHandler = () => {
         this.setState(prevState => {
@@ -163,16 +164,20 @@ class Events extends Component {
             .then(resData => {
                 console.log(resData);
                 const events = resData.data.events;
-                this.setState({
-                    events,
-                    loading: false
-                });
+                if (this.isActive) {
+                    this.setState({
+                        events,
+                        loading: false
+                    });
+                }
             })
             .catch(err => {
                 console.log(err);
-                this.setState({
-                    loading: false
-                })
+                if (this.isActive) {
+                    this.setState({
+                        loading: false
+                    });
+                }
             });
     };
 
@@ -186,7 +191,52 @@ class Events extends Component {
     };
 
     bookEventHandler = () => {
+        if(!this.context.token) {
+            this.setState({
+                selectedEvent: null
+            });
+            return;
+        }
+        const requestBody = {
+            query: `
+                mutation {
+                    bookEvent(eventId: "${this.state.selectedEvent._id}") {
+                    _id
+                    createdAt
+                    updatedAt
+                   } 
+                }
+            `
+        };
+
+        fetch('http://localhost:3001/graphql', {
+            method: 'POST',
+            body: JSON.stringify(requestBody),
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${this.context.token}`,
+            }
+        })
+            .then(res => {
+                if (res.status !== 200 && res.status !== 201) {
+                    throw new Error('Failed')
+                }
+                return res.json();
+            })
+            .then(resData => {
+                console.log(resData);
+                this.setState({
+                    selectedEvent: null
+                });
+            })
+            .catch(err => {
+                console.log(err);
+            });
     };
+
+    componentWillUnmount() {
+        this.isActive = false;
+    }
 
     render () {
 
@@ -216,7 +266,7 @@ class Events extends Component {
                         </Modal>
                     : null}
                 {this.state.selectedEvent &&
-                    <Modal title={this.state.selectedEvent.title} canCancel canConfirm toggleModal={this.modalViewDetailHandler} onConfirm={this.bookEventHandler} cancelName='Dismiss' confirmName='Book Event'>
+                    <Modal title={this.state.selectedEvent.title} canCancel canConfirm toggleModal={this.modalViewDetailHandler} onConfirm={this.bookEventHandler} cancelName='Dismiss' confirmName={this.context.token ? 'Book Event' : 'Confirm'}>
                         <h1>{this.state.selectedEvent.title}</h1>
                         <h2>£{this.state.selectedEvent.price} - {new Date(this.state.selectedEvent.date).toLocaleDateString()} </h2>
                         <p>{this.state.selectedEvent.description}</p>

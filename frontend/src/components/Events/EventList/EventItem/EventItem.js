@@ -1,5 +1,5 @@
 import React from 'react';
-import * as classes from './eventItem.module.css';
+import * as classes from './EventItem.module.css';
 
 const eventItem = props => (
     <li key={props.eventId} className={classes.listedEvent}>

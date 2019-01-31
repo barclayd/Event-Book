@@ -1,11 +1,10 @@
 import React from 'react';
-import EventItem from './EventItem/eventItem';
-import * as classes from './eventList.module.css';
+import EventItem from './EventItem/EventItem';
+import * as classes from './EventList.module.css';
 
 const eventList = props => {
 
     const events = props.events.map(event => {
-        console.log(event.creator._id);
         return <EventItem
             key={event._id}
             eventId={event._id}
