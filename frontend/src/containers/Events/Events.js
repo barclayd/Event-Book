@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Modal from '../../components/Modal/modal';
 import Backdrop from '../../components/Backdrop/backdrop';
 import AuthContext from '../../context/auth-context';
+import EventList from '../../components/Events/EventList/eventList';
 import * as classes from './Events.module.css';
 
 class Events extends Component {
@@ -150,10 +151,6 @@ class Events extends Component {
 
     render () {
 
-        const eventList = this.state.events.map(event => {
-            return <li key={event._id} className={classes.listedEvent}>{event.title}</li>
-        });
-
         return (
             <React.Fragment>
                 {this.state.createEvent ?
@@ -187,9 +184,7 @@ class Events extends Component {
                         <button className={classes.btn} onClick={this.createEventHandler}>Create Event</button>
                     )}
                 </div>
-                <ul className={classes.eventsList}>
-                    {eventList}
-                </ul>
+                <EventList events={this.state.events} owner={this.context.userId}/>
             </React.Fragment>
         );
     }

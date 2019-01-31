@@ -21,7 +21,7 @@ button:active {
     text-align: center;
     border: 1px solid #2F556B;
     padding: 3rem;
-    margin: 15vh calc(1vw - 1rem);
+    margin: 15vh calc(1vw - 1rem) 2vh calc(1vw - 1rem);
     width: 80vw;
     max-width: 80%;
 }
@@ -61,7 +61,7 @@ button:active {
 }
 
 .eventsList {
-    margin: 5vh calc(5vw - 1rem);
+    margin: 2vh calc(5vw - 1rem);
     width: 80vw;
     max-width: 90%;
     list-style: none;

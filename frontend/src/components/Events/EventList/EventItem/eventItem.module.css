@@ -1,0 +1,24 @@
+.listedEvent {
+    margin: 4vh 0;
+    padding: 1vh 1vw;
+    border: 1px solid rgb(52, 69, 31);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.listedEvent h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: rgba(85,107,47, 1);;
+}
+
+.listedEvent h2 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #767676;
+}
+
+.listedEvent p {
+    margin: 0;
+}
