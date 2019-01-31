@@ -15,9 +15,15 @@ class Events extends Component {
         this.dateRef = React.createRef();
         this.descriptionRef = React.createRef();
     }
+
+    componentDidMount() {
+        this.fetchEvents();
+    }
+
     state = {
         createEvent: false,
-        validationPass: false
+        validationPass: false,
+        events: []
     };
 
     createEventHandler = () => {
@@ -89,13 +95,65 @@ class Events extends Component {
             })
             .then(resData => {
                 console.log(resData);
+                this.fetchEvents();
             })
             .catch(err => {
                 console.log(err);
             });
     };
 
+    fetchEvents = () => {
+
+        const requestBody = {
+            query: `
+                query {
+                    events {
+                        _id
+                        title
+                        price
+                        description
+                        date
+                        creator {
+                            _id
+                            email
+                        }
+                   } 
+                }
+            `
+        };
+
+        fetch('http://localhost:3001/graphql', {
+            method: 'POST',
+            body: JSON.stringify(requestBody),
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+            .then(res => {
+                if (res.status !== 200 && res.status !== 201) {
+                    throw new Error('Failed')
+                }
+                return res.json();
+            })
+            .then(resData => {
+                console.log(resData);
+                const events = resData.data.events;
+                this.setState({
+                    events
+                });
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    };
+
+
     render () {
+
+        const eventList = this.state.events.map(event => {
+            return <li key={event._id} className={classes.listedEvent}>{event.title}</li>
+        });
+
         return (
             <React.Fragment>
                 {this.state.createEvent ?
@@ -125,8 +183,13 @@ class Events extends Component {
                     : null}
                 <div className={classes.eventsControl}>
                 <h1>Events</h1>
-                    {this.context.token ? <button className={classes.btn} onClick={this.createEventHandler}>Create Event</button> : null }
+                    {this.context.token && (
+                        <button className={classes.btn} onClick={this.createEventHandler}>Create Event</button>
+                    )}
                 </div>
+                <ul className={classes.eventsList}>
+                    {eventList}
+                </ul>
             </React.Fragment>
         );
     }

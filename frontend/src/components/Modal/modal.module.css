@@ -1,0 +1,125 @@
+.modal {
+    width: 70%;
+    max-width: 80vw;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+    position: fixed;
+    top: 15%;
+    left: 20%;
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    .modal {
+        width: 30rem;
+        left: calc((100% - 30rem)/2);
+    }
+}
+
+.modalHeader {
+    padding: 1rem;
+    background: #2F556B;
+    color: #fff;
+}
+
+.modalHeader h1 {
+    margin: 0;
+    font-size: 1.25rem;
+}
+
+.modalContent {
+    padding: 1rem;
+}
+
+.modalActions {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1rem;
+}
+
+.modalBtns {
+    display: flex;
+    padding: 5vh 0;
+}
+
+.modalBtns button:nth-child(1) {
+    margin-left: calc(100vw / 20);
+}
+
+.modalBtns button:nth-child(2) {
+    margin-left: calc(100vw / 3.1);
+}
+
+.btnCancel {
+    background: #bb2124;
+}
+
+@media (min-width: 200px) {
+
+    .modalBtns button:nth-child(1) {
+        margin-left: 1vw;
+    }
+    .modalBtns button:nth-child(2) {
+        margin-left: 4vw;
+    }
+
+}
+
+@media (min-width: 368px) {
+
+    .modalBtns button:nth-child(1) {
+        margin-left: 5vw;
+    }
+    .modalBtns button:nth-child(2) {
+        margin-left: 15vw;
+    }
+
+}
+
+@media (min-width: 400px) {
+    .modalBtns button:nth-child(1) {
+        margin-left: calc(100vw / 20);
+    }
+
+    .modalBtns button:nth-child(2) {
+        margin-left: calc(100vw / 4.8 );
+    }
+
+}
+
+
+@media (min-width: 760px) {
+
+    .modalBtns button:nth-child(2) {
+        margin-left: calc(100vw / 3.7 );
+    }
+
+}
+
+@media (min-width: 844px) {
+
+    .modalBtns button:nth-child(2) {
+        margin-left: calc(100vw / 4.3 );
+    }
+
+}
+
+@media (min-width: 1000px) {
+
+    .modalBtns button:nth-child(2) {
+        margin-left: calc(100vw / 5.4 );
+    }
+
+}
+
+@media (min-width: 1200px) {
+
+    .modalBtns button:nth-child(1) {
+        margin-left: calc(100vw / 35);
+    }
+
+    .modalBtns button:nth-child(2) {
+        margin-left: calc(100vw / 6.8 );
+    }
+
+}

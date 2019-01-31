@@ -1,0 +1,128 @@
+button {
+    background-color: #2F556B;
+    color: #fff;
+    font-family: inherit;
+    font-size: 1rem;
+    border: 1px solid rgba(47,85,107, 0.9);
+    border-radius: 3px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.26);
+    padding: 0.15rem 1rem;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+button:hover,
+button:active {
+    background: rgba(47,85,107, 0.8);;
+    border: 1px solid rgba(47,85,107, 0.8);
+}
+
+.eventsControl {
+    text-align: center;
+    border: 1px solid #2F556B;
+    padding: 3rem;
+    margin: 15vh calc(1vw - 1rem);
+    width: 80vw;
+    max-width: 80%;
+}
+
+@media (min-width: 768px) {
+    .eventsControl {
+        margin-left: calc(100vw / 4);
+        width: 30vw;
+    }
+}
+
+.formControl label,
+.formControl input {
+    width: 60vw;
+}
+
+.formControl {
+     margin-bottom: 2vh;
+ }
+
+.formControl textarea{
+    margin-top: 2vh;
+    width: 60vw;
+    border: 1px dashed #000;
+}
+
+.formControl label {
+    font-weight: bold;
+    padding: 2vh 1vw;
+}
+
+.formControl input {
+    padding: 0.2rem 0.15rem;
+    margin: 1vh 2vw;
+    font: inherit;
+    font-size: 1rem;
+}
+
+.eventsList {
+    margin: 5vh calc(5vw - 1rem);
+    width: 80vw;
+    max-width: 90%;
+    list-style: none;
+    padding: 0;
+}
+
+.listedEvent {
+    margin: 4vh 0;
+    padding: 1vh 1vw;
+    border: 1px solid rgb(52, 69, 31);
+}
+
+
+@media (min-width: 760px) {
+    .formControl label,
+    .formControl input {
+        max-width: 50vw;
+        margin-bottom: 0.5rem;
+    }
+
+    .formControl textarea{
+        max-width: 50vw;
+    }
+
+}
+
+@media (min-width: 844px) {
+    .formControl label,
+    .formControl input {
+        max-width: 40vw;
+        margin-bottom: 0.5rem;
+    }
+
+    .formControl textarea{
+        max-width: 40vw;
+    }
+
+}
+
+@media (min-width: 1031px) {
+    .formControl label,
+    .formControl input {
+        max-width: 35vw;
+        margin-bottom: 0.5rem;
+    }
+
+    .formControl textarea{
+        max-width: 35vw;
+    }
+
+}
+
+@media (min-width: 1200px) {
+    .formControl label,
+    .formControl input {
+        max-width: 25vw;
+        margin-bottom: 0.5rem;
+    }
+
+    .formControl textarea {
+        max-width: 25vw;
+    }
+
+}
