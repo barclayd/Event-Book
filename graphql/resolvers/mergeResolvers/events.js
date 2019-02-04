@@ -1,6 +1,7 @@
 const {dateToString} = require('../../../helpers/date');
 const {user} = require('./user');
 
+
 const transformEvent = event => {
     return {
         ...event._doc,

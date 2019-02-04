@@ -1,12 +1,15 @@
-const Event = require('../../../models/event');
-const {transformEvent} = require('./events');
 const {dateToString} = require('../../../helpers/date');
-const {user} = require('./user');
+const DataLoader = require('dataloader');
+const {events, user} = require('./user');
+
+const eventLoader = new DataLoader((eventIds) => {
+    return events(eventIds);
+});
 
 const singleEvent = async eventId => {
     try {
-        const event = await Event.findById(eventId);
-        return transformEvent(event);
+        const event = await eventLoader.load(eventId.toString());
+        return event;
     } catch (err) {
         throw err;
     }
