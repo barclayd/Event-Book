@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import BookingList from '../../components/Bookings/BookingList/BookingList';
+import BookingsChart from '../../components/Bookings/BookingsChart/BookingChart';
+import BookingsControl from '../../components/Bookings/BookingsControls/BookingControls';
 import Spinner from '../../components/Spinner/Spinner';
 import AuthContext from "../../context/auth-context";
 
@@ -11,7 +13,8 @@ class Bookings extends Component {
     state = {
         loading: false,
         bookings: [],
-        currentBooking: null
+        currentBooking: null,
+        outputType: 'list'
     };
 
     componentDidMount() {
@@ -33,6 +36,7 @@ class Bookings extends Component {
                             _id
                             title
                             date
+                            price
                         }
                    } 
                 }
@@ -121,12 +125,36 @@ class Bookings extends Component {
             });
     };
 
+    changeOutputTypeHandler = (outputType) => {
+        if (outputType === 'list') {
+            this.setState({
+                outputType: 'list'
+            })
+        } else {
+            this.setState({
+                outputType: 'chart'
+            })
+        }
+    };
+
     render () {
+        let content = <Spinner/>;
+        if(!this.state.loading) {
+            content = (
+                <React.Fragment>
+                   <BookingsControl
+                    activeOutputType={this.state.outputType}
+                    onChange={this.changeOutputTypeHandler}
+                   />
+                    <div>
+                        {this.state.outputType  === 'list' ? <BookingList bookings={this.state.bookings} cancelBooking={this.cancelBookingHandler}/> : <BookingsChart bookings={this.state.bookings} />}
+                    </div>
+                </React.Fragment>
+            );
+        }
         return (
             <React.Fragment>
-                {this.state.loading ? <Spinner /> : <ul>
-                <BookingList bookings={this.state.bookings} cancelBooking={this.cancelBookingHandler}/>
-            </ul>}
+                {content}
             </React.Fragment>
         );
     }
