@@ -77,6 +77,7 @@ class Auth extends Component {
             }
         })
             .then(res => {
+                console.log(res);
                 if(res.status !== 200 && res.status !== 201) {
                     throw new Error('User sign up failed')
                 }
