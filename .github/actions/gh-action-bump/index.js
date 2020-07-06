@@ -7,7 +7,13 @@ if (process.env.PACKAGEJSON_DIR) {
   process.chdir(process.env.GITHUB_WORKSPACE);
 }
 
-const commitVersion = async (tools, current, version, branch) => {
+const commitVersion = async (
+  tools,
+  current,
+  commitMessage,
+  version,
+  branch,
+) => {
   await tools.runInWorkspace('git', 'fetch');
   await tools.runInWorkspace('git', ['checkout', branch]);
   await tools.runInWorkspace('npm', [
@@ -22,6 +28,12 @@ const commitVersion = async (tools, current, version, branch) => {
     .trim();
   newVersion = newVersion.substr(1);
   newVersion = `${process.env['INPUT_TAG-PREFIX']}${newVersion}`;
+  await tools.runInWorkspace('git', [
+    'commit',
+    '-a',
+    '-m',
+    `ci: ${commitMessage} ${newVersion}`,
+  ]);
 
   const remoteRepo = `https://${process.env.GITHUB_ACTOR}:${process.env.GITHUB_TOKEN}@github.com/${process.env.GITHUB_REPOSITORY}.git`;
   await tools.runInWorkspace('git', ['tag', newVersion]);
@@ -93,8 +105,8 @@ Toolkit.run(async (tools) => {
 
     // do it in the current checked out github branch (DETACHED HEAD)
     // important for further usage of the package.json version
-    await commitVersion(tools, current, version, currentBranch);
-    await commitVersion(tools, current, version, 'develop');
+    await commitVersion(tools, current, commitMessage, version, currentBranch);
+    await commitVersion(tools, current, commitMessage, version, 'develop');
   } catch (e) {
     tools.log.fatal(e);
     tools.exit.failure('Failed to bump version');
