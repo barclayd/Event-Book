@@ -8,6 +8,7 @@ if (process.env.PACKAGEJSON_DIR) {
 }
 
 const commitVersion = async (tools, current, version, branch) => {
+  await tools.runInWorkspace('git', 'fetch');
   await tools.runInWorkspace('git', ['checkout', branch]);
   await tools.runInWorkspace('npm', [
     'version',
