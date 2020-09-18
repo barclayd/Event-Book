@@ -1,6 +1,6 @@
 {
   "name": "event-booking",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Event Booking system built using React.js frontend, GraphQL, Node.js and Mongo DB",
   "main": "index.js",
   "scripts": {
