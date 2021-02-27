@@ -11,9 +11,7 @@ Event Booking system built using React.js frontend, GraphQL, Node.js and Mongo D
   <img alt="Add an Event" src='https://user-images.githubusercontent.com/39765499/61582793-4454e780-ab27-11e9-8439-8e940a6a8709.png'>
 </p>
 
-### Features
-
-### How to Run
+### How to Run
 
 **_Run Server_**
 
