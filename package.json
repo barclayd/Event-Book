@@ -19,7 +19,7 @@
   "dependencies": {
     "bcrypt": "^5.0.0",
     "body-parser": "^1.18.3",
-    "chart.js": "^1.1.1",
+    "chart.js": "^2.9.4",
     "dataloader": "^1.4.0",
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
